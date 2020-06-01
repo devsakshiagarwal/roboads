@@ -1,5 +1,6 @@
 package com.goyal.roboads;
 
+import android.content.Intent;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.User;
 import com.goyal.roboads.utils.IdsUtil;
+import screen.unified.CometChatUnified;
 import timber.log.Timber;
 
 public class UserFormActivity extends AppCompatActivity {
@@ -29,13 +31,13 @@ public class UserFormActivity extends AppCompatActivity {
     CometChat.createUser(user, IdsUtil.APP_API_KEY, new CometChat.CallbackListener<User>() {
       @Override
       public void onSuccess(User user) {
-        Log.d(TAG,"createUser  " + user.toString());
+        Log.d(TAG, "createUser  " + user.toString());
         loginCometUser(user);
       }
 
       @Override
       public void onError(CometChatException e) {
-        Log.e(TAG,"createUser" + e.getMessage());
+        Log.e(TAG, "createUser" + e.getMessage());
         loginCometUser(user);
       }
     });
@@ -48,16 +50,17 @@ public class UserFormActivity extends AppCompatActivity {
 
         @Override
         public void onSuccess(User user) {
-          Log.d(TAG,"Login Successful : " + user.toString());
+          Log.d(TAG, "Login Successful : " + user.toString());
         }
 
         @Override
         public void onError(CometChatException e) {
-          Log.d(TAG,"Login failed with exception:" + e.getMessage());
+          Log.d(TAG, "Login failed with exception:" + e.getMessage());
         }
       });
     } else {
       Log.d(TAG, "User already logged in");
+      startActivity(new Intent(UserFormActivity.this, CometChatUnified.class));
     }
   }
 }
