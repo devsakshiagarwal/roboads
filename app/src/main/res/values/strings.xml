@@ -1,3 +1,17 @@
 <resources>
   <string name="app_name">RoboAds</string>
+  <string name="name">Name</string>
+  <string name="email">E-mail</string>
+  <string name="gender">Gender</string>
+  <string name="male">Male</string>
+  <string name="female">Female</string>
+  <string name="country">Country</string>
+  <string name="city">City</string>
+  <string name="submit">Submit Form</string>
+  <string name="login">Start Chat</string>
+  <string name="logout">Logout</string>
+  <string name="err_name_blank">Name can not be empty</string>
+  <string name="err_email_blank">E-mail can not be empty</string>
+  <string name="err_name">Name is not correct</string>
+  <string name="err_email">E-mail is not correct</string>
 </resources>

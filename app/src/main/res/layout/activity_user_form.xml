@@ -1,10 +1,298 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserFormActivity"
+    tools:context=".MainActivity"
     >
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/clSignup"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorWhite"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginTop="@dimen/margin_double"
+        android:text="@string/name"
+        android:textColor="@color/color91"
+        android:textSize="@dimen/text_11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_standard"
+        android:layout_marginRight="@dimen/margin_standard"
+        android:backgroundTint="@color/color_4c"
+        android:inputType="textPersonName"
+        android:maxLength="50"
+        android:text="@{activityUserForm.name}"
+        android:textColor="@color/color_4c"
+        android:textSize="@dimen/text_14"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/errorName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/text_9"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etName"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:maxLength="50"
+        android:text="@string/email"
+        android:textColor="@color/color91"
+        android:textSize="@dimen/text_11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etName"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_standard"
+        android:layout_marginRight="@dimen/margin_standard"
+        android:backgroundTint="@color/color_4c"
+        android:inputType="textEmailAddress"
+        android:text="@{activityUserForm.email}"
+        android:textColor="@color/color_4c"
+        android:textSize="@dimen/text_14"
+        app:layout_constraintTop_toBottomOf="@id/tvEmail"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/errorEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_standard"
+        android:textColor="@color/colorRed"
+        android:textSize="@dimen/text_9"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginTop="@dimen/margin_half"
+        android:text="@string/gender"
+        android:textColor="@color/color91"
+        android:textSize="@dimen/text_11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        />
+
+    <RadioGroup
+        android:id="@+id/rgGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_double"
+        android:layout_marginTop="@dimen/margin_half"
+        android:layout_marginEnd="@dimen/dp_18"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvGender"
+        >
+
+      <androidx.appcompat.widget.AppCompatRadioButton
+          android:id="@+id/rbMale"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checked="true"
+          android:text="@string/male"
+          android:textColor="@color/color_4c"
+          android:textSize="@dimen/text_14"
+          />
+
+      <androidx.appcompat.widget.AppCompatRadioButton
+          android:id="@+id/rbFemale"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/female"
+          android:textColor="@color/color_4c"
+          android:textSize="@dimen/text_14"
+          />
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/buttonSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_double"
+        android:text="@string/submit"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/text_17"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/clLogin"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:visibility="gone"
+      tools:context=".MainActivity"
+      >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarLogin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name"
+        app:titleTextColor="@color/colorWhite"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNameLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginTop="@dimen/margin_double"
+        android:text="@string/name"
+        android:textColor="@color/color91"
+        android:textSize="@dimen/text_11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLogin"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/etNameLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_double"
+        android:layout_marginRight="@dimen/margin_double"
+        android:inputType="textPersonName"
+        android:textColor="@color/color_4c"
+        android:textSize="@dimen/text_14"
+        app:layout_constraintTop_toBottomOf="@id/tvNameLogin"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvEmailLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="@string/email"
+        android:textColor="@color/color91"
+        android:textSize="@dimen/text_11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etNameLogin"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/etEmailLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_double"
+        android:layout_marginRight="@dimen/margin_double"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/color_4c"
+        android:textSize="@dimen/text_14"
+        app:layout_constraintTop_toBottomOf="@id/tvEmailLogin"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvGenderLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_18"
+        android:layout_marginTop="@dimen/margin_standard"
+        android:text="@string/gender"
+        android:textColor="@color/color91"
+        android:textSize="@dimen/text_11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/etEmailLogin"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/etGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_double"
+        android:layout_marginRight="@dimen/margin_double"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/color_4c"
+        android:textSize="@dimen/text_14"
+        app:layout_constraintTop_toBottomOf="@id/tvGenderLogin"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/buttonLogin"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:layout_weight="1"
+          android:padding="@dimen/margin_double"
+          android:text="@string/login"
+          android:textAlignment="center"
+          android:textAllCaps="true"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="@dimen/text_19"
+          android:textStyle="bold"
+
+          />
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/buttonLogout"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:padding="@dimen/margin_double"
+          android:text="@string/logout"
+          android:textAllCaps="true"
+          android:textColor="@color/colorPrimaryDark"
+          android:textSize="@dimen/text_19"
+          android:textStyle="bold"
+
+          />
+    </LinearLayout>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
