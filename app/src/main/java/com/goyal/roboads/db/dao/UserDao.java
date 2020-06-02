@@ -1,6 +1,7 @@
 package com.goyal.roboads.db.dao;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 import com.goyal.roboads.db.model.Users;
@@ -15,6 +16,9 @@ public interface UserDao {
   @Query("Select * from users where currentUser is 1")
   Users getCurrentUser();
 
-  @Update
+  @Insert
   void insertUser(Users user);
+
+  @Update
+  void updateUser(Users user);
 }

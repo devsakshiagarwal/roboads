@@ -7,7 +7,6 @@ import com.cometchat.pro.core.AppSettings;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.goyal.roboads.utils.IdsUtil;
-import timber.log.Timber;
 
 public class RoboAdsApplication extends Application {
 

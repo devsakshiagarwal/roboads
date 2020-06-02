@@ -1,6 +1,7 @@
 <resources>
   <string name="app_name">RoboAds</string>
   <string name="name">Name</string>
+  <string name="user_details">Logged In user details:</string>
   <string name="email">E-mail</string>
   <string name="gender">Gender</string>
   <string name="male">Male</string>
