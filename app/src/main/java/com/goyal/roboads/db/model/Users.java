@@ -14,7 +14,7 @@ public class Users {
   private int currentUser;
   private String gender;
 
-  public Users(String uid, String name, String email, int currentUser, String gender) {
+  public Users(@NonNull String uid, String name, String email, int currentUser, String gender) {
     this.uid = uid;
     this.name = name;
     this.email = email;
@@ -22,6 +22,7 @@ public class Users {
     this.gender = gender;
   }
 
+  @NonNull
   public String getUid() {
     return uid;
   }

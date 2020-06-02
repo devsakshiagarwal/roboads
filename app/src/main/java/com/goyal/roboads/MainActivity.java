@@ -1,5 +1,6 @@
 package com.goyal.roboads;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
@@ -16,9 +17,10 @@ import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.User;
 import com.goyal.roboads.db.RoboadsDb;
 import com.goyal.roboads.db.model.Users;
+import com.goyal.roboads.utils.MD5Helper;
 import com.goyal.roboads.utils.CommonUtils;
 import com.goyal.roboads.utils.IdsUtil;
-import java.util.UUID;
+import java.util.Objects;
 import screen.unified.CometChatUnified;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,8 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
   private void createCometUser(Users users) {
     User user = new User();
-    user.setUid(users.getUid());
-    user.setName(users.getName());
+    try {
+      user.setUid(MD5Helper.getMd5Encrypted(users.getEmail()));
+      user.setName(MD5Helper.getMd5Encrypted(users.getName()));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     CometChat.createUser(user, IdsUtil.APP_API_KEY, new CometChat.CallbackListener<User>() {
       @Override
       public void onSuccess(User user) {
@@ -87,8 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
   private void loginCometUser() {
     User user = new User();
-    user.setUid(currentUser.getUid());
-    user.setName(currentUser.getName());
+    try {
+      user.setUid(MD5Helper.getMd5Encrypted(currentUser.getEmail()));
+      user.setName(MD5Helper.getMd5Encrypted(currentUser.getName()));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     if (CometChat.getLoggedInUser() == null) {
       CometChat.login(user.getUid(), IdsUtil.APP_API_KEY, new CometChat.CallbackListener<User>() {
 
@@ -148,8 +158,9 @@ public class MainActivity extends AppCompatActivity {
   private void signUp() {
     if (isNameValid() && isEmailValid()) {
       progressBar.setVisibility(View.VISIBLE);
-      createCometUser(new Users(UUID.randomUUID().toString(), etNameSignUp.getText().toString(),
-          etEmailSignUp.getText().toString(), 1, getGender()));
+      createCometUser(
+          new Users(etEmailSignUp.getText().toString(), etNameSignUp.getText().toString(),
+              Objects.requireNonNull(etEmailSignUp.getText()).toString(), 1, getGender()));
     }
   }
 
@@ -161,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void insertUser(Users user) {
+    @SuppressLint("StaticFieldLeak")
     class InsertUser extends AsyncTask<Void, Void, Void> {
 
       @Override
@@ -170,11 +182,11 @@ public class MainActivity extends AppCompatActivity {
         return null;
       }
     }
-
     new InsertUser().execute();
   }
 
   private void updateUser(Users user) {
+    @SuppressLint("StaticFieldLeak")
     class UpdateUser extends AsyncTask<Void, Void, Void> {
 
       @Override
@@ -189,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void getCurrentUser() {
+    @SuppressLint("StaticFieldLeak")
     class GetUser extends AsyncTask<Void, Void, Users> {
 
       @Override

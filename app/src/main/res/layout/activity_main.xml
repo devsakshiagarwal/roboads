@@ -84,6 +84,7 @@
         android:layout_marginRight="@dimen/margin_standard"
         android:hint="Enter you email"
         android:inputType="textEmailAddress"
+        android:maxLength="60"
         android:textColor="@color/color_4c"
         android:textSize="@dimen/text_14"
         app:layout_constraintTop_toBottomOf="@id/tvEmail"
