@@ -8,7 +8,7 @@
   <string name="female">Female</string>
   <string name="country">Country</string>
   <string name="city">City</string>
-  <string name="submit">Submit Form</string>
+  <string name="submit">Login/Sign up</string>
   <string name="login">Start Chat</string>
   <string name="logout">Logout</string>
   <string name="err_name_blank">Name can not be empty</string>

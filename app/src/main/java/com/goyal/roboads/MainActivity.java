@@ -21,6 +21,7 @@ import com.goyal.roboads.utils.MD5Helper;
 import com.goyal.roboads.utils.CommonUtils;
 import com.goyal.roboads.utils.IdsUtil;
 import java.util.Objects;
+import java.util.UUID;
 import screen.unified.CometChatUnified;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     etEmailSignUp = findViewById(R.id.etEmail);
     progressBar = findViewById(R.id.progress_bar);
     (findViewById(R.id.buttonSubmit)).setOnClickListener((v) -> signUp());
-    (findViewById(R.id.buttonLogin)).setOnClickListener((v) -> loginCometUser());
+    (findViewById(R.id.buttonLogin)).setOnClickListener((v) -> loginCometUser(null));
     (findViewById(R.id.buttonLogout)).setOnClickListener((v) -> logout());
     getCurrentUser();
   }
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
   private void createCometUser(Users users) {
     User user = new User();
     try {
-      user.setUid(MD5Helper.getMd5Encrypted(users.getEmail()));
+      user.setUid(MD5Helper.getMd5Encrypted(UUID.randomUUID().toString()));
       user.setName(MD5Helper.getMd5Encrypted(users.getName()));
     } catch (Exception e) {
       e.printStackTrace();
@@ -75,11 +76,8 @@ public class MainActivity extends AppCompatActivity {
     CometChat.createUser(user, IdsUtil.APP_API_KEY, new CometChat.CallbackListener<User>() {
       @Override
       public void onSuccess(User user) {
-        Toast.makeText(MainActivity.this, "User created successfully!", Toast.LENGTH_SHORT)
-            .show();
         insertUser(users);
-        progressBar.setVisibility(View.GONE);
-        goToChatActivity();
+        loginCometUser(user);
       }
 
       @Override
@@ -91,13 +89,15 @@ public class MainActivity extends AppCompatActivity {
     });
   }
 
-  private void loginCometUser() {
-    User user = new User();
-    try {
-      user.setUid(MD5Helper.getMd5Encrypted(currentUser.getEmail()));
-      user.setName(MD5Helper.getMd5Encrypted(currentUser.getName()));
-    } catch (Exception e) {
-      e.printStackTrace();
+  private void loginCometUser(User cometUser) {
+    User user = cometUser;
+    if (user == null) {
+      try {
+        user.setUid(MD5Helper.getMd5Encrypted(currentUser.getUid()));
+        user.setName(MD5Helper.getMd5Encrypted(currentUser.getName()));
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
     }
     if (CometChat.getLoggedInUser() == null) {
       CometChat.login(user.getUid(), IdsUtil.APP_API_KEY, new CometChat.CallbackListener<User>() {
